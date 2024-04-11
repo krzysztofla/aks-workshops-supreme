@@ -8,33 +8,22 @@ inputs:
     description: 'The version of Terraform to use'
     required: true
     default: '1.7.5'
-  ARM_CLIENT_ID:
-    description: 'Azure Service Principal Client ID'
-    required: true
-  ARM_CLIENT_SECRET:
-    description: 'Azure Service Principal Client Secret'
-    required: true
-  ARM_SUBSCRIPTION_ID:
-    description: 'Azure Subscription ID'
-    required: true
-  ARM_TENANT_ID:
-    description: 'Azure Tenant ID'
+  AZURE_CREDENTIALS:
+    description: 'Azure Service Principal Credentials'
     required: true
 
 runs:
   using: 'composite'
   steps:
     - name: Setup Terraform
-      uses: hashicorp/setup-terraform@v1
+      uses: hashicorp/setup-terraform@v3
       with:
         terraform_version: ${{ inputs.terraform_version }}
 
     - name: Auth to Azure
-      uses: azure/login@v1
+      uses: azure/login@v2
       with:
-        client-id: ${{ inputs.AZURE_CLIENT_ID }}
-        client-secret: ${{ inputs.AZURE_CLIENT_SECRET }}
-        tenant-id: ${{ inputs.AZURE_TENANT_ID }}
+        creds: ${{ inputs.AZURE_CREDENTIALS }}
 
     - name: Terraform init
       working-directory: ${{ inputs.terraform_directory }}
