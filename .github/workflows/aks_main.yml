@@ -31,6 +31,6 @@ jobs:
             - name: Terraform Plan
               uses: ./.github/plan/aks
               with:
-                terraform_directory: 'terraform/aks'
+                terraform_directory: '.github/plan/aks/terraform/aks'
                 terraform_version: ${{ env.TF_VERSION }}
                 AZURE_CREDENTIALS : ${{ secrets.AZURE_CREDENTIALS }}
