@@ -20,7 +20,6 @@ inputs:
   ARM_TENANT_ID:
     description: 'Azure Tenant ID'
     required: true
-  
 
 runs:
   using: 'composite'
